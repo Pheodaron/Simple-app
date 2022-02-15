@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Main-page</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <meta charset="utf-8">
+
+    <div th:insert="~{parts/bootstrap::bootstrap-header}">
+    </div>
+
+</head>
+<body>
+    <div th:insert="~{parts/bootstrap::bootstrap-js}"></div>
+    <div th:insert="~{parts/navbar::authorized}"></div>
+
+    <div class="container">
+        <div> <h2>Это основная страница. Тут будет весь функционал!</h2></div>
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out"/>
+            </form>
+        <div sec:authorize="hasAuthority('ADMIN')">
+            <form th:action="@{/user}" method="GET">
+                <input type="submit" value="Admin page"/>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

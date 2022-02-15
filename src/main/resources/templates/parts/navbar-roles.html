@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!-- navbar anonimous-->
+<div th:fragment="anonimous">
+<ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="/">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/login">Login</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/registration">Registration</a>
+    </li>
+</ul>
+</div>
+
+<!-- navbar user-->
+<div th:fragment="user">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/main">Main</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/addTrain">Add train</a>
+        </li>
+<!--        <li class="nav-item">-->
+<!--            <a class="nav-link" th:href="@{|/user/${user.getId()}|}">User edit</a>-->
+<!--        </li>-->
+        <li class="nav-item">
+            <a class="nav-link" href="/myPage">MyPage</a>
+        </li>
+    </ul>
+</div>
+
+<!-- navbar admin-->
+<div th:fragment="admin">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/main">Main</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/addTrain">Add train</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/user">User list</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

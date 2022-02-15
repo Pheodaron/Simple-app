@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Spring Security Example </title>
+    <meta charset="utf-8">
+
+    <div th:insert="~{parts/bootstrap::bootstrap-header}">
+    </div>
+
+</head>
+<body>
+
+    <div th:insert="~{parts/bootstrap::bootstrap-js}">
+    </div>
+
+<div th:insert="~{parts/navbar::authorized}">
+</div>
+
+<div class="container">
+<div>
+    <h1> Добавить тренировку </h1>
+    <form th:action="@{/addTrain}" method="post" enctype="multipart/form-data">
+        <div><label> exercise_name: <input type="text" name="exercise_name"/> </label></div>
+        <div><input type="submit" value="add"/></div>
+        <div><input type="file" name="file"></div>
+    </form>
+</div>
+<div>
+    <h1>Список тренировок</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Exercise_name</th>
+            <th>AuthorName</th>
+        </tr>
+        <tr th:each="train : ${trainings}">
+            <td th:text="${train.id}"></td>
+            <td th:text="${train.exercise_name}"></td>
+            <td th:text="${train.getAuthorName()}"></td>
+            <td>
+                <div>
+                    <img th:src="@{|/img/${train.filename}|}">
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>userList</title>
+    <meta charset="utf-8">
+
+    <div th:insert="~{parts/bootstrap::bootstrap-header}">
+    </div>
+
+</head>
+<body>
+
+<div th:insert="~{parts/bootstrap::bootstrap-js}">
+</div>
+
+<div th:insert="~{parts/navbar::admin}">
+</div>
+
+<div class="container">
+    <h1>Список пользователей</h1>
+    <h2> Current user:</h2>
+    <h2 th:text="${username}"></h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>password</th>
+            <th>Roles</th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.getId()}"></td>
+            <td th:text="${user.getUsername()}"></td>
+            <td th:text="${user.getPassword()}"></td>
+            <td th:each="role : ${user.getRoles()}"><strong th:text="${role}"></strong></td>
+            <td><a th:href="@{|/user/${user.getId()}|}">edit</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

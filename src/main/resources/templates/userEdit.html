@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>User Editor</title>
+    <meta charset="utf-8">
+
+    <div th:insert="~{parts/bootstrap::bootstrap-header}">
+    </div>
+
+</head>
+<body>
+
+<div th:insert="~{parts/bootstrap::bootstrap-js}">
+</div>
+
+<div th:insert="~{parts/navbar::authorized}">
+</div>
+
+<div class="container">
+    <form action="/user" method="POST">
+        <input type="text" name="username" th:value="${user.username}"/>
+        <div th:each="role : ${roles}">
+            <label th:for="${role}" th:text ="${role}"></label>
+            <input type="checkbox" th:checked="${#lists.contains(user.roles, role)}" th:name="${role}"/>
+
+        </div>
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+        <input type="hidden" th:value="${user.id}" name="userId"/>
+        <button type="submit">Save</button>
+    </form>
+</div>
+</body>
+</html>
