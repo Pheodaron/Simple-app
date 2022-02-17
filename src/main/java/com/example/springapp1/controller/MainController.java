@@ -16,6 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 @Controller
@@ -34,7 +36,10 @@ public class MainController {
     }
 
     @GetMapping("/addTrain")
-    public String addTrain() {
+    public String addTrain(
+        Model model) {
+        Iterable<Training> trainings = trainingRepo.findAll();
+        model.addAttribute("trainings", trainings);
         return "addTrain";
     }
 
@@ -54,7 +59,10 @@ public class MainController {
             }
 
             String uuidFile = UUID.randomUUID().toString();
-            String resultFilename = uuidFile + "." + file.getOriginalFilename();
+            String resultFilename = URLEncoder.encode(
+                uuidFile + "." + file.getOriginalFilename(),
+                StandardCharsets.UTF_8.toString()
+            );
 
             file.transferTo(new File(uploadPath + "/" + resultFilename));
 
