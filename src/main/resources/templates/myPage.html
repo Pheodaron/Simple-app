@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
 <head>
     <title>MyPage</title>
     <meta charset="utf-8">
@@ -9,26 +10,32 @@
     </div>
 
 </head>
-<body>
-<div th:insert="~{parts/bootstrap::bootstrap-js}">
-</div>
-<div th:insert="~{parts/navbar::authorized}">
-</div>
 
-<div class="container">
-    <table>
-        <tr>
-            <th>Username</th>
-            <th>password</th>
-            <th>Roles</th>
-        </tr>
-        <tr>
-            <td th:text="${user.getUsername()}"></td>
-            <td th:text="${user.getPassword()}"></td>
-            <td th:each="role : ${user.getRoles()}"><strong th:text="${role}"></strong></td>
-        </tr>
-    </table>
-</div>
+<body>
+    <div th:insert="~{parts/bootstrap::bootstrap-js}">
+    </div>
+    <div th:insert="~{parts/navbar::authorized}">
+    </div>
+
+    <div class="container">
+        <div class="pt-10">
+            <div class="flex flex-col rounded bg-gradient-to-r from-cyan-500 to-blue-500 text-white p-4">
+                <div class="flex text-xl">
+                    <span class="w-24">Username:</span>
+                    <span class="pl-2" th:text="${user.getUsername()}"></span>
+                </div>
+                <div class="flex pt-4">
+                    <span class="w-24">Password:</span>
+                    <span class="pl-2" th:text="${user.getPassword()}"></span>
+                </div>
+                <div class="flex pt-4">
+                    <span class="w-24">Roles:</span>
+                    <div class="flex pl-2" th:text="${#strings.listJoin(user.getRoles(), ',')}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
+
 </html>
